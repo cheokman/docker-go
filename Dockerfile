@@ -1,8 +1,8 @@
 FROM centos:7
 MAINTAINER Ben Wu <wucheokman@gmail.com>
 
-ENV GOROOT     /usr/local
-ENV GOHOME     /usr/local/go
+ENV GOROOT     /usr/local/go
+ENV GOHOME     /usr/local
 ENV GOPATH     /opt/third-party/go
 ENV GO_VERSION  1.7.3
 
@@ -12,8 +12,8 @@ RUN yum -y update \
     git \
     wget \
     && yum clean all \
-    && mkdir -p                "${GOPATH}" \
-    && curl -Ls                "https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz" | tar -xz --directory ${GOROOT}
+    && mkdir -p "${GOPATH}" \
+    && curl -Ls "https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz" | tar -xz --directory ${GOHOME}
 
-WORKDIR ${GOHOME}
-ENV PATH $PATH:${GOHOME}/bin
+WORKDIR ${GOROOT}
+ENV PATH $PATH:${GOROOT}/bin
